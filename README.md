@@ -1,5 +1,19 @@
 # Project Vantage
 
+[![English](https://img.shields.io/badge/English-EN-blue)](README.md)
+[![Português](https://img.shields.io/badge/Português-BR-green)](README.pt-BR.md)
+[![Español](https://img.shields.io/badge/Español-ES-yellow)](README.es.md)
+[![Français](https://img.shields.io/badge/Français-FR-lightgrey)](README.fr.md)
+
+[![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet)](https://dotnet.microsoft.com/)
+[![C# 12](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=csharp)](https://learn.microsoft.com/dotnet/csharp/)
+[![Blazor WASM](https://img.shields.io/badge/Blazor-WASM-512BD4?style=for-the-badge&logo=blazor)](https://learn.microsoft.com/aspnet/core/blazor/)
+[![.NET Aspire](https://img.shields.io/badge/.NET-Aspire-5C2D91?style=for-the-badge&logo=dotnet)](https://learn.microsoft.com/dotnet/aspire/)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/zPagano/ProjectVantage/ci.yml?branch=main&style=for-the-badge)](https://github.com/zPagano/ProjectVantage/actions)
+[![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
+
+---
+
 **Project Vantage** is an enterprise-grade, game-agnostic eSports intelligence platform. Initially focused on the League of Legends ecosystem, the architecture is strictly designed to isolate game-specific data through an Anti-Corruption Layer (ACL), ensuring seamless future expansion to other competitive titles.
 
 ## 🏗 System Architecture
@@ -22,23 +36,39 @@ The repository enforces strict physical boundaries between bounded contexts:
 * `/docs` - Architecture Decision Records (ADRs) and onboarding documentation.
 
 ## 🚀 Development Stack
-* **Backend:** C# 12, .NET 10 Web API
-* **Frontend:** Blazor WebAssembly (WASM)
-* **Database:** SQL Server 2025 (Entity Framework Core)
-* **Orchestration:** .NET Aspire
-* **Observability:** OpenTelemetry (OTLP)
+* **Backend:** C# 12, .NET 10 Web API  
+* **Frontend:** Blazor WebAssembly (WASM)  
+* **Database:** SQL Server 2025 (Entity Framework Core)  
+* **Orchestration:** .NET Aspire  
+* **Observability:** OpenTelemetry (OTLP)  
 
 ---
 
-## 📞 Contact
+## 📬 Contact & Inquiries
 
-For inquiries related to licensing, collaboration, security disclosures, or professional communication, please use the contact information below:
+For licensing questions, collaboration proposals, security disclosures, bug reports, feature requests, or any professional inquiry related to Project Vantage, please refer to the full inquiry system:
 
-**Email:** `your-email@example.com`  
-**Website:** `https://your-website-here.com`  
-**LinkedIn:** `https://www.linkedin.com/in/your-profile/`  
-**Business Address:** `Your Company or Personal Address Here`  
+👉 **[Inquiry Templates](./docs/inquiry-templates.md)**
+
+This includes:
+
+- Fully localized templates (EN, PT‑BR, ES, FR)  
+- Tailored email bodies for each inquiry type  
+- A flowchart to help you choose the correct inquiry path  
+
+If you prefer direct contact, you may also email:
+
+📧 **lucaspaganopolisel@gmail.com**
 
 ---
 
-*Developed under strict architectural mentorship by the Vantage Execution Engine.*
+## 📞 Additional Contact
+
+**Website:** https://zpagano.github.io/  
+**LinkedIn:** https://www.linkedin.com/in/lucas-pagano-polisel/
+
+---
+
+## 📄 License
+
+This project is proprietary. See the [LICENSE](LICENSE) file for details.
