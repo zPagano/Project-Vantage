@@ -1,1 +1,21 @@
-<Solution />
+<Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/ci.yml" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/inquiry-templates.md" />
+    <File Path="docs/Subscription Matrix.xlsx" />
+  </Folder>
+  <Folder Name="/Repository Root/">
+    <File Path=".gitignore" />
+    <File Path="CLA.md" />
+    <File Path="LICENSE" />
+    <File Path="README.es.md" />
+    <File Path="README.fr.md" />
+    <File Path="README.md" />
+    <File Path="README.pt-BR.md" />
+  </Folder>
+  <Project Path="infrastructure/Vantage.AppHost/Vantage.AppHost.csproj" Id="b0fe06d6-11f7-4330-be4e-946a46560c8f" />
+  <Project Path="src/Shared/Vantage.ServiceDefaults/Vantage.ServiceDefaults.csproj" Id="e0af0ae9-4ecc-41cf-b74b-c08fb26ceeb1" />
+</Solution>
