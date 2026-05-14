@@ -1,0 +1,31 @@
+name: Vantage Enterprise CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore Dependencies
+      run: dotnet restore Vantage.sln
+
+    - name: Build Solution (Strict Mode)
+      # /warnaserror enforces that all compiler warnings fail the build, maintaining strict code quality.
+      run: dotnet build Vantage.sln --no-restore --configuration Release /warnaserror
+
+    - name: Execute Test Suite
+      # Runs all xUnit/NUnit tests discovered in the solution.
+      run: dotnet test Vantage.sln --no-build --configuration Release --verbosity normal
