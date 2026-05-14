@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,17 @@ namespace Vantage.Presentation.Hosting.Errors
                 problemDetails.Status = StatusCodes.Status401Unauthorized;
                 problemDetails.Title = "Unauthorized";
                 problemDetails.Detail = "Access is denied due to invalid or missing credentials.";
+            }
+            else if(exception is ValidationException validationException)
+            {
+                problemDetails.Status = StatusCodes.Status400BadRequest;
+                problemDetails.Title = "Validation Failed";
+                problemDetails.Detail = "One or more validation errors occurred.";
+
+                // Map the FluentValidation errors directly into the ProblemDetails extensions
+                problemDetails.Extensions["errors"] = validationException.Errors
+                    .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
+                    .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
             }
 
             httpContext.Response.StatusCode = problemDetails.Status.Value;
