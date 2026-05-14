@@ -1,11 +1,14 @@
 name: Vantage Enterprise CI
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
+  workflow_dispatch:
 
 jobs:
   build-and-test:
@@ -24,9 +27,7 @@ jobs:
       run: dotnet restore Vantage.sln
 
     - name: Build Solution (Strict Mode)
-      # /warnaserror enforces that all compiler warnings fail the build, maintaining strict code quality.
       run: dotnet build Vantage.sln --no-restore --configuration Release /warnaserror
 
     - name: Execute Test Suite
-      # Runs all xUnit/NUnit tests discovered in the solution.
       run: dotnet test Vantage.sln --no-build --configuration Release --verbosity normal
