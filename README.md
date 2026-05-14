@@ -9,7 +9,7 @@
 [![C# 12](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=csharp)](https://learn.microsoft.com/dotnet/csharp/)
 [![Blazor WASM](https://img.shields.io/badge/Blazor-WASM-512BD4?style=for-the-badge&logo=blazor)](https://learn.microsoft.com/aspnet/core/blazor/)
 [![.NET Aspire](https://img.shields.io/badge/.NET-Aspire-5C2D91?style=for-the-badge&logo=dotnet)](https://learn.microsoft.com/dotnet/aspire/)
-[![CI Status](https://img.shields.io/github/actions/workflow/status/zPagano/ProjectVantage/ci.yml?branch=main&style=for-the-badge)](https://github.com/zPagano/ProjectVantage/actions)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/zPagano/Project-Vantage/ci.yml?branch=main&style=for-the-badge)](https://github.com/zPagano/ProjectVantage/actions)
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
 
 ---
