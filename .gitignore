@@ -1,0 +1,90 @@
+# ==============================================================================
+# Project Vantage - Enterprise .NET 10 .gitignore
+# ==============================================================================
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+
+# Environment Variables & Local Secrets
+.env
+.env.*
+*.Development.json
+*.development.json
+secrets.json
+
+# .NET Aspire Local Data
+.aspire/
+
+# Test results and coverage
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+
+# OS Generated
+.DS_Store
+Thumbs.db
+
+# ==============================================================================
+# Google Drive Sync Artifacts (Local Repo Stored in Google Drive)
+# ==============================================================================
+
+# Google Drive file streaming metadata
+*.tmp.drivedownload
+*.tmp.driveupload
+*.tmp.driveupload.json
+
+# Google Drive sync state files
+*.gdignore
+*.gdoc
+*.gsheet
+*.gslides
+*.gdraw
+*.gtable
+*.glink
+
+# Google Drive desktop hidden metadata
+*.googledrive
+*.googledrive.*
+*.driveupload
+*.drivedownload
+
+# Google Drive conflict copies
+* (Conflicted copy*).*
+* (Conflict Copy*).*
+* (Case Conflict*).*
+* (Autosaved).*
+
+# Google Drive temporary files
+~$*
