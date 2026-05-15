@@ -31,6 +31,7 @@
     <Project Path="src/UI/Vantage.UI.DesignSystem/Vantage.UI.DesignSystem.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Vantage.Gateway.BFF.Tests/Vantage.Gateway.BFF.Tests.csproj" Id="b9aa41d9-f04d-4858-9b8e-516751b90b1f" />
     <Project Path="tests/Vantage.Presentation.Hosting.Tests/Vantage.Presentation.Hosting.Tests.csproj" Id="f88e917a-16a7-4b92-b5c7-ed96384013d4" />
   </Folder>
 </Solution>
