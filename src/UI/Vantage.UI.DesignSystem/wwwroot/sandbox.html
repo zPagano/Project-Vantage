@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Vantage Design System Sandbox</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body class="vantage-app-container">
+
+    <!-- Sidebar Navigation -->
+    <nav class="vantage-sidebar">
+        <!-- Brand Area with Logo Placeholder -->
+        <div class="vantage-flex-row" style="padding: var(--vantage-space-lg); border-bottom: var(--vantage-border-subtle);">
+            <div class="vantage-logo-placeholder">LOGO</div>
+            <p class="vantage-brand-title">VANTAGE</p>
+        </div>
+        <div style="padding: var(--vantage-space-md);">
+            <p style="color: var(--vantage-text-secondary); margin-bottom: var(--vantage-space-sm);">Dashboard</p>
+            <p style="color: var(--vantage-text-secondary);">Escrows</p>
+        </div>
+
+        <!-- Theme & Accessibility Toggles (For Sandbox Testing Only) -->
+        <div style="padding: var(--vantage-space-md); margin-top: auto; border-top: var(--vantage-border-subtle);">
+            <button class="btn-primary" onclick="toggleTheme()" style="width: 100%; margin-bottom: var(--vantage-space-sm);">Toggle Theme</button>
+            <button class="btn-primary" onclick="toggleColorblind()" style="width: 100%; background-color: var(--vantage-bg-surface-elevated); color: var(--vantage-text-primary); border: var(--vantage-border-subtle);">Toggle Colorblind Mode</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="vantage-main-content">
+
+        <header style="margin-bottom: var(--vantage-space-xl);">
+            <!-- Enlarged Page Title -->
+            <h1 class="vantage-page-title">Intelligence Overview</h1>
+
+            <!-- Team Subheader with Logo Placeholder -->
+            <div class="vantage-flex-row" style="margin-top: var(--vantage-space-sm);">
+                <div class="vantage-logo-placeholder">BB</div>
+                <p style="color: var(--vantage-text-secondary); font-size: var(--vantage-text-lg); margin: 0;">Black Bulls Analytics</p>
+            </div>
+        </header>
+
+        <!-- The Layout Grid -->
+        <div class="vantage-grid-dashboard">
+
+            <div class="vantage-surface">
+                <h3 style="color: var(--vantage-text-muted);">Active Escrows</h3>
+                <div class="vantage-flex-row" style="margin-top: var(--vantage-space-xs);">
+                    <!-- Redundant Encoding: Using a shape (circle) and text along with color -->
+                    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: var(--vantage-brand-warning);"></span>
+                    <p style="font-size: 2rem; color: var(--vantage-text-primary); font-weight: bold; margin: 0;">3 Pending</p>
+                </div>
+            </div>
+
+            <div class="vantage-surface">
+                <h3 style="color: var(--vantage-text-muted);">Team NPI Rating</h3>
+                <div class="vantage-flex-row" style="margin-top: var(--vantage-space-xs);">
+                    <!-- Redundant Encoding: Using a directional arrow -->
+                    <p style="font-size: 2rem; color: var(--vantage-brand-accent); font-weight: bold; margin: 0;">▲ Top 15%</p>
+                </div>
+            </div>
+
+            <div class="vantage-surface" style="border-color: var(--vantage-brand-primary); box-shadow: var(--vantage-shadow-glow);">
+                <h3 style="color: var(--vantage-text-primary);">Quick Actions</h3>
+                <button class="btn-primary" style="margin-top: var(--vantage-space-md);">Initiate Handshake</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Simple scripts to swap the data attributes -->
+    <script>
+        function toggleTheme() {
+            const htmlTag = document.documentElement;
+            const currentTheme = htmlTag.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlTag.setAttribute('data-theme', newTheme);
+        }
+
+        function toggleColorblind() {
+            const htmlTag = document.documentElement;
+            const isColorblind = htmlTag.getAttribute('data-colorblind') === 'true';
+            htmlTag.setAttribute('data-colorblind', isColorblind ? 'false' : 'true');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿/* ==========================================================================
+   Project Vantage - Global Design System Variables
+   ========================================================================== */
+
+:root {
+    /* Color Palette - Default Dark eSports Theme */
+    --vantage-bg-base: #0f111a;
+    --vantage-bg-surface: #1a1d2d;
+    --vantage-bg-surface-elevated: #262a40;
+    --vantage-text-primary: #ffffff;
+    --vantage-text-secondary: #cbd5e1; /* Lightened from #94a3b8 */
+    --vantage-text-muted: #94a3b8; /* Lightened from #475569 */
+
+    /* Semantic Brand Colors - Updated Blue */
+    --vantage-brand-primary: #0ea5e9; /* Vibrant Cerulean/eSports Blue */
+    --vantage-brand-primary-hover: #0284c7;
+    --vantage-brand-accent: #10b981; /* Success / Positive NPI */
+    --vantage-brand-warning: #f59e0b; /* Escrow Pending */
+    --vantage-brand-danger: #ef4444; /* Errors / Negative NPI */
+
+    /* Typography */
+    --vantage-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --vantage-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Global Typography Scale */
+    --vantage-text-xs: 0.75rem;
+    --vantage-text-sm: 0.875rem;
+    --vantage-text-base: 1rem;
+    --vantage-text-lg: 1.125rem;
+    --vantage-text-xl: 1.25rem;
+    --vantage-text-2xl: 1.5rem;
+    --vantage-text-3xl: 2rem;
+    --vantage-text-4xl: 2.5rem;
+
+    /* Spacing System */
+    --vantage-space-xs: 0.25rem;
+    --vantage-space-sm: 0.5rem;
+    --vantage-space-md: 1rem;
+    --vantage-space-lg: 1.5rem;
+    --vantage-space-xl: 2rem;
+
+    /* Borders, Shadows, & Accessibility */
+    --vantage-radius-md: 8px;
+    --vantage-border-subtle: 1px solid rgba(255, 255, 255, 0.1);
+    --vantage-shadow-glow: 0 0 15px rgba(14, 165, 233, 0.25);
+    --vantage-focus-ring: 2px solid var(--vantage-brand-primary);
+    --vantage-focus-offset: 2px;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+    --vantage-bg-base: #f1f5f9;
+    --vantage-bg-surface: #ffffff;
+    --vantage-bg-surface-elevated: #e2e8f0;
+
+    /* UPDATED: Darkened the text for stronger contrast */
+    --vantage-text-primary: #0f172a;
+    --vantage-text-secondary: #334155;
+    --vantage-text-muted: #475569;
+
+    /* UPDATED: Increased border opacity from 0.1 to 0.2 for thicker appearance */
+    --vantage-border-subtle: 1px solid rgba(0, 0, 0, 0.2);
+    --vantage-shadow-glow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Accessibility - Colorblind Mode Overrides
+   ========================================================================== */
+
+[data-colorblind="true"] {
+    /* Shifts the standard Green "Success" to a safe high-contrast Blue */
+    --vantage-brand-accent: #3b82f6;
+    /* Shifts the standard Yellow/Red "Warning/Danger" to a safe high-contrast Orange/Amber */
+    --vantage-brand-warning: #fbbf24;
+    --vantage-brand-danger: #ea580c;
+}

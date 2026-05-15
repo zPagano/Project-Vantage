@@ -1,0 +1,131 @@
+﻿/* ==========================================================================
+   Project Vantage - Structural Layout Utilities
+   ========================================================================== */
+
+body {
+    background-color: var(--vantage-bg-base);
+    color: var(--vantage-text-primary);
+    font-family: var(--vantage-font-sans);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Base structural container for the application */
+.vantage-app-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Sidebar for navigation */
+.vantage-sidebar {
+    width: 260px;
+    background-color: var(--vantage-bg-surface);
+    border-right: var(--vantage-border-subtle);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content area */
+.vantage-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: var(--vantage-space-xl);
+}
+
+/* Standard Data Grid / Dashboard Layout */
+.vantage-grid-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--vantage-space-lg);
+}
+
+/* Standard UI Surface (Cards) */
+.vantage-surface {
+    background-color: var(--vantage-bg-surface);
+    border-radius: var(--vantage-radius-md);
+    border: var(--vantage-border-subtle);
+    padding: var(--vantage-space-md);
+}
+
+/* ==========================================================================
+   Project Vantage - Accessibility & Interactions
+   ========================================================================== */
+
+/* Universal Focus State for Keyboard Navigation */
+*:focus-visible {
+    outline: var(--vantage-focus-ring);
+    outline-offset: var(--vantage-focus-offset);
+    border-radius: 2px; /* Ensure outline doesn't clip awkwardly */
+}
+
+/* Base Button Styling (to test our new hover states) */
+.btn-primary {
+    background-color: var(--vantage-brand-primary);
+    color: #ffffff; /* Always white text on primary button */
+    border: none;
+    padding: var(--vantage-space-sm) var(--vantage-space-md);
+    border-radius: var(--vantage-radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--vantage-brand-primary-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Project Vantage - Typography & Logo Utilities
+   ========================================================================== */
+
+/* Remove default margins for cleaner component layout */
+h1, h2, h3, h4, p {
+    margin-top: 0;
+}
+
+.vantage-page-title {
+    font-size: var(--vantage-text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--vantage-space-xs);
+    letter-spacing: -0.02em;
+}
+
+.vantage-brand-title {
+    font-size: var(--vantage-text-2xl);
+    font-weight: 800;
+    color: var(--vantage-brand-primary);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+/* Flexible row container for aligning text next to logos */
+.vantage-flex-row {
+    display: flex;
+    align-items: center;
+    gap: var(--vantage-space-md);
+}
+
+/* Universal Logo Placeholder Box */
+.vantage-logo-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--vantage-radius-md);
+    background-color: var(--vantage-bg-surface-elevated);
+    border: var(--vantage-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vantage-text-muted);
+    font-size: var(--vantage-text-xs);
+    font-weight: bold;
+    flex-shrink: 0;
+}
