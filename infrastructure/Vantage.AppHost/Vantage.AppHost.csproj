@@ -8,4 +8,8 @@
     <UserSecretsId>d080fbb2-b821-4ce0-a959-a5f3c4958da0</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gateways\Vantage.Gateway.BFF\Vantage.Gateway.BFF.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -20,6 +20,9 @@
     <File Path="README.pt-BR.md" />
   </Folder>
   <Folder Name="/src/" />
+  <Folder Name="/src/Gateways/">
+    <Project Path="src/Gateways/Vantage.Gateway.BFF/Vantage.Gateway.BFF.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/Vantage.Presentation.Hosting/Vantage.Presentation.Hosting.csproj" />
     <Project Path="src/Shared/Vantage.ServiceDefaults/Vantage.ServiceDefaults.csproj" Id="5e698bd0-0f00-4e5d-b4c3-781fec394e60" />
