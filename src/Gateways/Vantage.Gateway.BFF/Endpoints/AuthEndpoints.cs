@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Vantage.Presentation.Hosting.Security;
+using FluentValidation;
 
 namespace Vantage.Gateway.BFF.Endpoints
 {
@@ -114,6 +115,25 @@ namespace Vantage.Gateway.BFF.Endpoints
                 }
                 return Results.Unauthorized();
             });
+
+            // Temporary endpoint to visually test i18n translation of RFC 9457 Problem Details
+            group.MapGet("/test/error", () =>
+            {
+                var validationFailures = new List<FluentValidation.Results.ValidationFailure>
+                {
+                    new FluentValidation.Results.ValidationFailure("DemoProperty", "This string is untouched, but the Title and Detail will be translated.")
+                };
+
+                throw new FluentValidation.ValidationException("Validation failed", validationFailures);
+            });
+
+            // Diagnostic endpoint to verify the i18n pipeline is intercepting the header
+            group.MapGet("/test/culture", () =>
+                Results.Ok(new
+                {
+                    Culture = System.Globalization.CultureInfo.CurrentCulture.Name,
+                    UICulture = System.Globalization.CultureInfo.CurrentUICulture.Name
+                }));
 
             #endregion
 

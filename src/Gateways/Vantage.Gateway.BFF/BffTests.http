@@ -1,46 +1,74 @@
-@port = 7125 
-### NOTE: Replace 7183 with your actual BFF HTTPS port
+@port = 7125
 
-### Test the Login Endpoint
+### 1. Test the Login Endpoint
 POST https://localhost:{{port}}/api/auth/login
 // Expected: 200 OK & Set-Cookie Header
 ###
 
-### Login as Organization Manager
+### 2. Login as Organization Manager
 POST https://localhost:{{port}}/api/auth/login/manager
 // Expected: 200 OK & Set-Cookie Header
 
 ###
 
-### Test Org Endpoint (As Manager)
+### 3. Test Org Endpoint (As Manager)
 GET https://localhost:{{port}}/api/auth/test/roster
 // Expected: 200 OK
 
 ###
 
-### Test FA Endpoint (As Manager)
+### 4. Test FA Endpoint (As Manager)
 GET https://localhost:{{port}}/api/auth/test/escrow
 // Expected: 403 Forbidden (Because Manager has an OrgId)
 
 ###
 
-### Logout
+### 5. Logout
 POST https://localhost:{{port}}/api/auth/logout
 
 ###
 
-### Login as Free Agent Staff
+### 6. Login as Free Agent Staff
 POST https://localhost:{{port}}/api/auth/login/freeagent
 // Expected: 200 OK & Set-Cookie Header
 
 ###
 
-### Test FA Endpoint (As Free Agent)
+### 7. Test FA Endpoint (As Free Agent)
 GET https://localhost:{{port}}/api/auth/test/escrow
 // Expected: 200 OK
 
 ###
 
-### Test Org Endpoint (As Free Agent)
+### 8. Test Org Endpoint (As Free Agent)
 GET https://localhost:{{port}}/api/auth/test/roster
 // Expected: 403 Forbidden (Because FA is missing the OrgId claim AND RosterManage permission)
+
+### 9. Test i18n Error Response (English Fallback)
+GET https://localhost:{{port}}/api/auth/test/error
+Accept-Language: en-US
+// Expected: 400 Bad Request with "Validation Failed" in English
+
+###
+
+### 10. Test i18n Error Response (Portuguese - Brazil)
+GET https://localhost:{{port}}/api/auth/test/error
+Accept-Language: pt-BR
+// Expected: 400 Bad Request with "Validation Failed" translated to Portuguese
+
+###
+
+### 11. Test i18n Error Response (Spanish)
+GET https://localhost:{{port}}/api/auth/test/error
+Accept-Language: es
+// Expected: 400 Bad Request with "Validation Failed" translated to Spanish
+
+### 12. Test i18n Error Response (French)
+GET https://localhost:{{port}}/api/auth/test/error
+Accept-Language: fr
+// Expected: 400 Bad Request with "Validation Failed" translated to French
+
+### 13. Diagnose Current Culture (Spanish)
+GET https://localhost:{{port}}/api/auth/test/culture
+Accept-Language: es
+// Expected: "es"

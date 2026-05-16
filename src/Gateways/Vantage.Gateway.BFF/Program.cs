@@ -2,6 +2,7 @@ using Vantage.Gateway.BFF.Endpoints;
 using Vantage.Presentation.Hosting.Errors;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Vantage.Presentation.Hosting.Security;
+using Vantage.Presentation.Hosting.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,11 +38,13 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddVantageAuthorizationPolicies();
+builder.Services.AddVantageLocalization();
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 app.UseVantageErrorHandling();
+app.UseVantageRequestLocalization();
 
 // Add Auth Middleware to the pipeline
 app.UseAuthentication();

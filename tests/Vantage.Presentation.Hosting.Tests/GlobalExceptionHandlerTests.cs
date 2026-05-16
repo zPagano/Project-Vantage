@@ -1,16 +1,18 @@
-﻿using System;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 using Vantage.Presentation.Hosting.Errors;
+using Vantage.Presentation.Hosting.Localization;
 using Xunit;
 
 namespace Vantage.Presentation.Hosting.Tests
@@ -22,14 +24,30 @@ namespace Vantage.Presentation.Hosting.Tests
     {
         private readonly GlobalExceptionHandler _handler;
 
+        #region Fake Localizer for Testing
+        /// <summary>
+        /// A fake localizer that returns the exact key requested. 
+        /// This allows us to prove the localization pipeline is invoked without requiring physical .resx files in the test suite.
+        /// </summary>
+        private class FakeStringLocalizer : IStringLocalizer<SharedResource>
+        {
+            public LocalizedString this[string name] => new LocalizedString(name, name);
+            public LocalizedString this[string name, params object[] arguments] => new LocalizedString(name, name);
+            public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures) => Enumerable.Empty<LocalizedString>();
+        }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalExceptionHandlerTests"/> class, establishing the testing harness.
         /// </summary>
         public GlobalExceptionHandlerTests()
         {
             var logger = NullLogger<GlobalExceptionHandler>.Instance;
-            _handler = new GlobalExceptionHandler(logger);
+            var localizer = new FakeStringLocalizer();
+            _handler = new GlobalExceptionHandler(logger, localizer);
         }
+
+        #region Edge Case Tests
 
         /// <summary>
         /// Verifies that an UnauthorizedAccessException correctly mutates the HTTP response into a 401 Unauthorized ProblemDetails object.
@@ -52,8 +70,9 @@ namespace Vantage.Presentation.Hosting.Tests
 
             Assert.NotNull(problemDetails);
             Assert.Equal(StatusCodes.Status401Unauthorized, problemDetails.Status);
-            Assert.Equal("Unauthorized", problemDetails.Title);
-            Assert.Equal("Access is denied due to invalid or missing credentials.", problemDetails.Detail);
+            // Assert against the KEY to prove the localizer was called
+            Assert.Equal("UnauthorizedTitle", problemDetails.Title);
+            Assert.Equal("UnauthorizedDetail", problemDetails.Detail);
         }
 
         /// <summary>
@@ -84,11 +103,10 @@ namespace Vantage.Presentation.Hosting.Tests
             var root = document.RootElement;
 
             Assert.Equal(StatusCodes.Status400BadRequest, root.GetProperty("status").GetInt32());
+            // Assert against the KEY to prove the localizer was called
+            Assert.Equal("ValidationFailedTitle", root.GetProperty("title").GetString());
 
-            // Check for the title you set in your GlobalExceptionHandler implementation
-            // Note: Depending on your exact implementation from Phase 1, this might be "Bad Request" instead of "Validation Failed". 
-            // If the test still fails here, simply update the expected string to match your handler's output.
-            Assert.Equal("Validation Failed", root.GetProperty("title").GetString());
+
 
             var errors = root.GetProperty("errors");
 
@@ -120,10 +138,13 @@ namespace Vantage.Presentation.Hosting.Tests
 
             Assert.NotNull(problemDetails);
             Assert.Equal(StatusCodes.Status500InternalServerError, problemDetails.Status);
-            Assert.Equal("Server Error", problemDetails.Title);
-            Assert.Equal("An unexpected error occurred. Please refer to the trace ID for support.", problemDetails.Detail);
+            // Assert against the KEY to prove the localizer was called
+            Assert.Equal("ServerErrorTitle", problemDetails.Title);
+            Assert.Equal("ServerErrorDetail", problemDetails.Detail);
 
             Assert.DoesNotContain("database failure", responseJson);
         }
+
+        #endregion
     }
 }
