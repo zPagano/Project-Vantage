@@ -33,88 +33,120 @@
     }
 
     /// <summary>
-    /// Contains the exhaustive constant string values for all granular system permissions across the platform.
+    /// Contains the exhaustive list of granular system permissions.
+    /// Premium permissions are injected dynamically via Tiers and are not granted by default base roles.
     /// </summary>
     public static class VantagePermissions
     {
         #region Competitive & Roster
-        /// <summary>Allows access to the platform's internal matchmaking queue.</summary>
+        /// <summary>Access internal matchmaking queues.</summary>
         public const string MatchmakingInHouseQueue = "Matchmaking.InHouseQueue";
 
-        /// <summary>Allows the organization to schedule scrimmages with other teams.</summary>
+        /// <summary>Book practice matches against other teams.</summary>
         public const string ScrimSchedule = "Scrim.Schedule";
 
-        /// <summary>Allows the user to initiate a formal roster transfer request.</summary>
+        /// <summary>Initiate a transfer request.</summary>
         public const string RosterTransferRequest = "Roster.TransferRequest";
 
-        /// <summary>Allows the user to approve an incoming roster transfer request.</summary>
+        /// <summary>Approve an incoming player transfer.</summary>
         public const string RosterTransferAccept = "Roster.TransferAccept";
 
-        /// <summary>Allows standard management of internal roster configurations.</summary>
+        /// <summary>Manage team slots, sub-ins, and lineup settings.</summary>
         public const string RosterManage = "Roster.Manage";
         #endregion
 
         #region Analytics & Intelligence
-        /// <summary>Allows viewing of standard NPI metrics.</summary>
+        /// <summary>View standard Anonymized Metrics.</summary>
         public const string AnalyticsViewBasic = "Analytics.ViewBasic";
 
-        /// <summary>Allows viewing of advanced visual analytics and heatmaps.</summary>
+        /// <summary>View advanced visual analytics and heatmaps.</summary>
         public const string AnalyticsViewAdvanced = "Analytics.ViewAdvanced";
 
-        /// <summary>Allows FA Staff to view in-depth tactician-level metrics for linked students.</summary>
-        public const string AnalyticsViewTactician = "Analytics.ViewTactician";
+        /// <summary>Access individual player/student profiles. Data resolution depends strictly on the viewer's Tier.</summary>
+        public const string AnalyticsViewCoaching = "Analytics.ViewCoaching";
 
-        /// <summary>Allows FA Staff to view and compare group NPI metrics.</summary>
+        /// <summary>Compare group metrics across a roster.</summary>
         public const string AnalyticsViewGroup = "Analytics.ViewGroup";
 
-        /// <summary>Allows execution of high token depth AI inference requests.</summary>
+        /// <summary>Execute AI-powered scrimmage analysis.</summary>
+        public const string AnalyticsScrimAnalysis = "Analytics.ScrimAnalysis";
+
+        /// <summary>Execute high token depth AI requests.</summary>
         public const string AnalyticsHighTokenInference = "Analytics.HighTokenInference";
 
-        /// <summary>Allows exporting of watermarked analytical data to external formats.</summary>
+        /// <summary>Share and receive secure snapshots of dashboards internally.</summary>
+        public const string AnalyticsShareInsights = "Analytics.ShareInsights";
+
+        /// <summary>Export watermarked data to Excel (.xlsx) with backend audit logging.</summary>
         public const string AnalyticsExportExcel = "Analytics.ExportExcel";
 
-        /// <summary>Allows access to AI-powered scrimmage analysis.</summary>
-        public const string AnalyticsScrimAnalysis = "Analytics.ScrimAnalysis";
+        /// <summary>Export raw data to CSV with backend audit logging.</summary>
+        public const string AnalyticsExportCsv = "Analytics.ExportCsv";
+
+        /// <summary>Export watermarked formatted reports to PDF with backend audit logging.</summary>
+        public const string AnalyticsExportPdf = "Analytics.ExportPdf";
         #endregion
 
         #region Financial & Organization
-        /// <summary>Allows FA Staff to initiate secure financial holds for services rendered.</summary>
+        /// <summary>Initiate financial holds for services rendered.</summary>
         public const string PaymentEscrow = "Payment.Escrow";
 
-        /// <summary>Allows viewing of organizational financial and payment history.</summary>
+        /// <summary>View organizational financial and payment history.</summary>
         public const string BillingViewFinancials = "Billing.ViewFinancials";
         #endregion
 
         #region Tenant & Platform Management
-        /// <summary>Grants foundational access to load the Blazor shell dashboard.</summary>
+        /// <summary>Base access to load the Blazor shell application.</summary>
         public const string SystemDashboardAccess = "System.DashboardAccess";
 
-        /// <summary>Allows direct Machine-to-Machine API access bypassing the UI.</summary>
+        /// <summary>Machine-to-Machine API bypass access.</summary>
         public const string SystemApiAccess = "System.ApiAccess";
 
-        /// <summary>Allows linking an existing platform user to a staff dashboard.</summary>
+        /// <summary>Access to unreleased experimental features.</summary>
+        public const string SystemBetaAccess = "System.BetaAccess";
+
+        /// <summary>Link an existing user to a staff dashboard.</summary>
         public const string TenantLinkStudent = "Tenant.LinkStudent";
 
-        /// <summary>Allows a Partner to provision and fund a new platform account for a student.</summary>
+        /// <summary>Provision and fund a new account for a student.</summary>
         public const string TenantProvisionStudent = "Tenant.ProvisionStudent";
 
-        /// <summary>Grants Level 1 visibility for self-promotion within the platform.</summary>
-        public const string ProfileVisibilityL1 = "Profile.VisibilityL1";
-
-        /// <summary>Grants Level 2 premium visibility for self-promotion within the platform.</summary>
-        public const string ProfileVisibilityL2 = "Profile.VisibilityL2";
-
-        /// <summary>Allows an organization to connect standard Discord integrations.</summary>
-        public const string IntegrationDiscordBot = "Integration.DiscordBot";
-
-        /// <summary>Allows an organization to apply custom branding to their Discord bot.</summary>
-        public const string IntegrationDiscordBotBranding = "Integration.DiscordBotBranding";
-
-        /// <summary>Allows enterprise organizations to configure white-label portal settings.</summary>
+        /// <summary>Configure white-label portal settings.</summary>
         public const string TenantWhiteLabel = "Tenant.WhiteLabel";
 
-        /// <summary>Grants access to unreleased, experimental beta features.</summary>
-        public const string SystemBetaAccess = "System.BetaAccess";
+        /// <summary>Connect a standard Discord bot.</summary>
+        public const string IntegrationDiscordBot = "Integration.DiscordBot";
+
+        /// <summary>Apply custom branding to the Discord bot.</summary>
+        public const string IntegrationDiscordBotBranding = "Integration.DiscordBotBranding";
+        #endregion
+
+        #region Ecosystem Visibility Matrices
+        /// <summary>Prioritizes individual recruitment and content.</summary>
+        public const string VisibilityUserL1 = "Visibility.User.L1";
+        public const string VisibilityUserL2 = "Visibility.User.L2";
+        public const string VisibilityUserL3 = "Visibility.User.L3";
+
+        /// <summary>Prioritizes scrim queues and tournament seeding.</summary>
+        public const string VisibilityTeamL1 = "Visibility.Team.L1";
+        public const string VisibilityTeamL2 = "Visibility.Team.L2";
+        public const string VisibilityTeamL3 = "Visibility.Team.L3";
+
+        /// <summary>Prioritizes sponsorships and white-glove support.</summary>
+        public const string VisibilityOrgL1 = "Visibility.Org.L1";
+        public const string VisibilityOrgL2 = "Visibility.Org.L2";
+        public const string VisibilityOrgL3 = "Visibility.Org.L3";
+        #endregion
+
+        #region Parent Aggregations (Flattened by IAM)
+        /// <summary>PARENT: Unlocks Request and Accept transfer powers.</summary>
+        public const string RosterManageTransfer = "Roster.ManageTransfer";
+
+        /// <summary>PARENT: Unlocks Excel, CSV, and PDF exports.</summary>
+        public const string AnalyticsExportAll = "Analytics.ExportAll";
+
+        /// <summary>PARENT: Unlocks Basic, Advanced, Coaching, and Group views.</summary>
+        public const string AnalyticsViewAll = "Analytics.ViewAll";
         #endregion
     }
 }

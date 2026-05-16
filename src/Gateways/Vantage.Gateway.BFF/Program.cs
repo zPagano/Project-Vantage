@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddVantageAuthorizationPolicies();
+builder.Services.AddVantageAuthorization();
 builder.Services.AddVantageLocalization();
 
 var app = builder.Build();

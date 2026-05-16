@@ -6,6 +6,7 @@
   <Folder Name="/docs/">
     <File Path="docs/inquiry-templates.md" />
     <File Path="docs/RBAC-Matrix.md" />
+    <File Path="docs/RBAC-Permissions-Matrix.md" />
     <File Path="docs/Subscription Matrix.xlsx" />
     <File Path="docs/Subscription-Tiers.md" />
   </Folder>
@@ -25,6 +26,9 @@
   <Folder Name="/src/Gateways/">
     <Project Path="src/Gateways/Vantage.Gateway.BFF/Vantage.Gateway.BFF.csproj" />
   </Folder>
+  <Folder Name="/src/Microservices/">
+    <Project Path="src/Microservices/Vantage.Identity.API/Vantage.Identity.API.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/Vantage.Presentation.Hosting/Vantage.Presentation.Hosting.csproj" />
     <Project Path="src/Shared/Vantage.ServiceDefaults/Vantage.ServiceDefaults.csproj" Id="5e698bd0-0f00-4e5d-b4c3-781fec394e60" />
@@ -34,6 +38,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Vantage.Gateway.BFF.Tests/Vantage.Gateway.BFF.Tests.csproj" Id="b9aa41d9-f04d-4858-9b8e-516751b90b1f" />
+    <Project Path="tests/Vantage.Identity.API.Tests/Vantage.Identity.API.Tests.csproj" Id="40ba578b-f321-4a18-bb92-2d4ac3f915be" />
     <Project Path="tests/Vantage.Presentation.Hosting.Tests/Vantage.Presentation.Hosting.Tests.csproj" Id="f88e917a-16a7-4b92-b5c7-ed96384013d4" />
   </Folder>
 </Solution>

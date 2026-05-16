@@ -1,0 +1,39 @@
+﻿@port = 7019
+### NOTE: Replace <PORT> with the Identity API's HTTPS port
+
+### Test 1: Basic Role Flattening
+### Expected: "Organization Manager" should unwrap into Dashboard, Roster Manage, Scrim Schedule, AND the Parent "Roster.ManageTransfer" should recursively unwrap into TransferRequest and TransferAccept.
+POST https://localhost:{{port}}/api/diagnostics/flatten
+Content-Type: application/json
+
+{
+    "roles": ["Organization Manager"],
+    "customPermissions": []
+}
+
+###
+
+### Test 2: Custom Permission Injection + Deduplication
+### Expected: The user gets "Player" base permissions. We also manually inject "Roster.ManageTransfer". The engine should merge them, recursively unpack the transfer rights, and deduplicate everything perfectly.
+POST https://localhost:{{port}}/api/diagnostics/flatten
+Content-Type: application/json
+
+{
+    "roles": ["Player"],
+    "customPermissions": [
+        "Roster.ManageTransfer",
+        "Analytics.ViewBasic" 
+    ]
+}
+
+###
+
+### Test 3: Unrecognized Role Resilience
+### Expected: The engine ignores "Ghost Role" without crashing, but still successfully flattens "System Administrator".
+POST https://localhost:{{port}}/api/diagnostics/flatten
+Content-Type: application/json
+
+{
+    "roles": ["System Administrator", "Ghost Role"],
+    "customPermissions": []
+}

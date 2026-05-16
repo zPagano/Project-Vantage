@@ -50,7 +50,7 @@ namespace Vantage.Gateway.BFF.Tests
             var rosterResponse = await client.SendAsync(rosterRequest);
             Assert.Equal(HttpStatusCode.OK, rosterResponse.StatusCode);
 
-            // 2. Test Invalid Path (Has Org Context, but endpoint requires Free Agent Context)
+            // 2. Test Invalid Path (Has Org Context, but lacks Escrow Permission)
             var escrowRequest = new HttpRequestMessage(HttpMethod.Get, "/api/auth/test/escrow");
             escrowRequest.Headers.Add("Cookie", cookie);
 

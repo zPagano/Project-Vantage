@@ -93,13 +93,13 @@ namespace Vantage.Gateway.BFF.Endpoints
 
             #region Protected Test Routes
 
-            // This endpoint requires BOTH the Organization Context AND the Roster Manage Permission
+            // This endpoint requires the Roster Manage Permission (which intrinsically requires a Tenant Context via our 3D Matrix)
             group.MapGet("/test/roster", () => Results.Ok(new { Message = "Roster management access granted." }))
-                 .RequireAuthorization("Context.Organization", VantagePermissions.RosterManage);
+                 .RequireAuthorization(VantagePermissions.RosterManage);
 
-            // This endpoint requires BOTH the Free Agent Context AND the Escrow Permission
+            // This endpoint requires the Escrow Permission (Global policy, no Tenant Context required)
             group.MapGet("/test/escrow", () => Results.Ok(new { Message = "Financial escrow access granted." }))
-                 .RequireAuthorization("Context.FreeAgent", VantagePermissions.PaymentEscrow);
+                 .RequireAuthorization(VantagePermissions.PaymentEscrow);
 
             // Diagnostic endpoint to check current session state
             group.MapGet("/user", (ClaimsPrincipal user) =>
