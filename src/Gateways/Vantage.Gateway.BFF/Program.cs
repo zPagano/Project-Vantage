@@ -1,6 +1,7 @@
 using Vantage.Gateway.BFF.Endpoints;
 using Vantage.Presentation.Hosting.Errors;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Vantage.Presentation.Hosting.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +27,16 @@ builder.Services.AddAuthentication(options =>
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
         return Task.CompletedTask;
     };
+
+    // Returns a 403 Forbidden instead of redirecting to /Account/AccessDenied
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        return Task.CompletedTask;
+    };
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddVantageAuthorizationPolicies();
 
 var app = builder.Build();
 
@@ -43,5 +51,3 @@ app.UseAuthorization();
 app.MapAuthEndpoints();
 
 app.Run();
-
-public partial class Program { }

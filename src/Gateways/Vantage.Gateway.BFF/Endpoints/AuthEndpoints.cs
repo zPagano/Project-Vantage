@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Vantage.Presentation.Hosting.Security;
 
 namespace Vantage.Gateway.BFF.Endpoints
 {
@@ -17,6 +18,49 @@ namespace Vantage.Gateway.BFF.Endpoints
         public static IEndpointRouteBuilder MapAuthEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/auth");
+
+            #region Simulated Login Routes
+
+            group.MapPost("/login/manager", async (HttpContext context) =>
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, "manager-123"),
+                    new Claim(ClaimTypes.Name, "Demo Manager"),
+                    // Dimension 1: Tenant
+                    new Claim(VantageClaims.OrganizationId, "org-black-bulls"),
+                    // Dimension 3: Tier
+                    new Claim(VantageClaims.SubscriptionTier, "Pro"),
+                    // Dimension 2: Permissions
+                    new Claim(VantageClaims.Permission, VantagePermissions.RosterManage),
+                    new Claim(VantageClaims.Permission, VantagePermissions.ScrimSchedule)
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+                return Results.Ok(new { Message = "Logged in as Organization Manager." });
+            });
+
+            group.MapPost("/login/freeagent", async (HttpContext context) =>
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, "fa-coach-456"),
+                    new Claim(ClaimTypes.Name, "Demo FA Coach"),
+                    // Dimension 1: Missing OrganizationId (Implies Free Agent)
+                    // Dimension 3: Tier
+                    new Claim(VantageClaims.SubscriptionTier, "Partner"),
+                    // Dimension 2: Permissions
+                    new Claim(VantageClaims.Permission, VantagePermissions.PaymentEscrow),
+                    new Claim(VantageClaims.Permission, VantagePermissions.TenantProvisionStudent)
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+                return Results.Ok(new { Message = "Logged in as Free Agent Staff." });
+            });
 
             group.MapPost("/login", async (HttpContext context) =>
             {
@@ -44,8 +88,20 @@ namespace Vantage.Gateway.BFF.Endpoints
                 return Results.Ok(new { Message = "Logged out successfully." });
             });
 
+            #endregion
+
+            #region Protected Test Routes
+
+            // This endpoint requires BOTH the Organization Context AND the Roster Manage Permission
+            group.MapGet("/test/roster", () => Results.Ok(new { Message = "Roster management access granted." }))
+                 .RequireAuthorization("Context.Organization", VantagePermissions.RosterManage);
+
+            // This endpoint requires BOTH the Free Agent Context AND the Escrow Permission
+            group.MapGet("/test/escrow", () => Results.Ok(new { Message = "Financial escrow access granted." }))
+                 .RequireAuthorization("Context.FreeAgent", VantagePermissions.PaymentEscrow);
+
             // Diagnostic endpoint to check current session state
-            group.MapPost("/user", (ClaimsPrincipal user) =>
+            group.MapGet("/user", (ClaimsPrincipal user) =>
             {
                 if (user.Identity?.IsAuthenticated == true)
                 {
@@ -58,6 +114,8 @@ namespace Vantage.Gateway.BFF.Endpoints
                 }
                 return Results.Unauthorized();
             });
+
+            #endregion
 
             return app;
         }

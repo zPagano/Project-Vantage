@@ -1,2 +1,46 @@
+@port = 7125 
+### NOTE: Replace 7183 with your actual BFF HTTPS port
+
 ### Test the Login Endpoint
-POST https://localhost:7125/api/auth/login
+POST https://localhost:{{port}}/api/auth/login
+// Expected: 200 OK & Set-Cookie Header
+###
+
+### Login as Organization Manager
+POST https://localhost:{{port}}/api/auth/login/manager
+// Expected: 200 OK & Set-Cookie Header
+
+###
+
+### Test Org Endpoint (As Manager)
+GET https://localhost:{{port}}/api/auth/test/roster
+// Expected: 200 OK
+
+###
+
+### Test FA Endpoint (As Manager)
+GET https://localhost:{{port}}/api/auth/test/escrow
+// Expected: 403 Forbidden (Because Manager has an OrgId)
+
+###
+
+### Logout
+POST https://localhost:{{port}}/api/auth/logout
+
+###
+
+### Login as Free Agent Staff
+POST https://localhost:{{port}}/api/auth/login/freeagent
+// Expected: 200 OK & Set-Cookie Header
+
+###
+
+### Test FA Endpoint (As Free Agent)
+GET https://localhost:{{port}}/api/auth/test/escrow
+// Expected: 200 OK
+
+###
+
+### Test Org Endpoint (As Free Agent)
+GET https://localhost:{{port}}/api/auth/test/roster
+// Expected: 403 Forbidden (Because FA is missing the OrgId claim AND RosterManage permission)

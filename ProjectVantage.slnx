@@ -5,7 +5,9 @@
   </Folder>
   <Folder Name="/docs/">
     <File Path="docs/inquiry-templates.md" />
+    <File Path="docs/RBAC-Matrix.md" />
     <File Path="docs/Subscription Matrix.xlsx" />
+    <File Path="docs/Subscription-Tiers.md" />
   </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="infrastructure/Vantage.AppHost/Vantage.AppHost.csproj" Id="e0f20e26-f532-47d5-9613-fcd0b6f099df" />

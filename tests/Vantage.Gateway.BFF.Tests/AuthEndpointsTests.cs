@@ -43,5 +43,31 @@ namespace Vantage.Gateway.BFF.Tests
             Assert.Contains("httponly", sessionCookie.ToLower());
             Assert.Contains("samesite=strict", sessionCookie.ToLower());
         }
+
+        /// <summary>
+        /// Verifies that accessing a protected diagnostic endpoint without an authentication cookie results in a strictly enforced 401 Unauthorized response.
+        /// </summary>
+        [Fact]
+        public async Task GetUser_WithoutCookie_Returns401Unauthorized()
+        {
+            var response = await _client.GetAsync("/api/auth/user");
+
+            Assert.Equal(System.Net.HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        /// <summary>
+        /// Verifies that accessing a protected diagnostic endpoint with a forged or invalid authentication cookie is rejected with a 401 Unauthorized response, proving the cryptographic signature verification works.
+        /// </summary>
+        [Fact]
+        public async Task GetUser_WithInvalidCookie_Returns401Unauthorized()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/auth/user");
+
+            request.Headers.Add("Cookie", "__Host-Vantage-Session=CfDJ8...forged_and_invalid_payload...12345");
+
+            var response = await _client.SendAsync(request);
+
+            Assert.Equal(System.Net.HttpStatusCode.Unauthorized, response.StatusCode);
+        }
     }
 }
